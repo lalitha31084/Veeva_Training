@@ -1,0 +1,90 @@
+package org.example;
+
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class P3 {
+    public void first(){
+        //getAttribute
+        WebDriver driver=new EdgeDriver();
+        driver.get("https://maya.adityauniversity.in/");
+        driver.findElement(By.linkText("Login")).click();
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,200)");
+        WebElement roll=driver.findElement(By.name("roll_no"));
+        roll.sendKeys("23A91A6108");
+        System.out.println(roll.getAttribute("value"));
+        WebElement password=driver.findElement(By.name("password"));
+        password.sendKeys("Lalitha@121813");
+        System.out.println(password.getAttribute("value"));
+        driver.quit();
+    }
+    public void second(){
+        // isSelected()
+        WebDriver driver1=new ChromeDriver();
+        driver1.get("https://qapracticehub.com/");
+        driver1.findElement(By.linkText("Selection")).click();
+        WebElement w1 = driver1.findElement(By.id("gender-female"));
+        System.out.println("Before clicking: " + w1.isSelected());
+        w1.click();
+        System.out.println("After clicking: " + w1.isSelected());
+        driver1.quit();
+    }
+    public void three(){
+        // isDisplayed
+        WebDriver driver=new EdgeDriver();
+        driver.get("https://maya.adityauniversity.in/");
+        driver.findElement(By.linkText("Login")).click();
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,200)");
+        WebElement roll=driver.findElement(By.name("roll_no"));
+        roll.sendKeys("23A91A6108");
+        if(roll.isDisplayed()){
+            System.out.println("Field is displayed");
+        }
+        else{
+            System.out.println("Not dispalyed");
+        }
+        driver.quit();
+
+    }
+    public void four(){
+        //getText
+        WebDriver driver=new EdgeDriver();
+        driver.get("https://maya.adityauniversity.in/");
+        driver.findElement(By.linkText("Login")).click();
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,200)");
+        WebElement roll=driver.findElement(By.name("roll_no"));
+        roll.sendKeys("23A91A6108");
+
+        String expected="23A91A6108";
+        String actual=roll.getAttribute("value");
+        assertEquals(actual,expected);
+        driver.quit();
+    }
+    public void five(){
+            WebDriver driver1 = new ChromeDriver();
+            driver1.get("https://qapracticehub.com");
+            driver1.findElement(By.linkText("Inputs")).click();
+            System.out.println(driver1.findElement(By.id("text-input")).isEnabled());
+            driver1.quit();
+    }
+    public static void main(String[] args){
+        WebDriverManager.chromedriver().setup();
+        P3 p3=new P3();
+        p3.first();
+        p3.second();
+        p3.three();
+        p3.four();
+        p3.five();
+    }
+
+}
